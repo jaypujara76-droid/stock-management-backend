@@ -3,9 +3,6 @@ const jwt = require("jsonwebtoken");
 const User =
   require("../models/User");
 
-const BlacklistedToken =
-  require("../models/BlacklistedToken");
-
 const authMiddleware = async (
   req,
   res,
@@ -27,19 +24,6 @@ const authMiddleware = async (
 
     const token =
       authHeader.split(" ")[1];
-
-    const blacklistedToken =
-      await BlacklistedToken.findOne({
-        token
-      });
-
-    if (blacklistedToken) {
-
-      return res.status(401).json({
-        success: false,
-        message: "Token expired"
-      });
-    }
 
     const decoded = jwt.verify(
       token,

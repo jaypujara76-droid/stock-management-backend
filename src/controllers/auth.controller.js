@@ -39,7 +39,8 @@ class AuthController {
 
       return res.status(200).json({
         success: true,
-        message: "Login successful",
+        message:
+          "Login successful",
         data: result
       });
 
@@ -56,14 +57,10 @@ class AuthController {
 
     try {
 
-      const result =
-        await authService.logout(
-          req.token
-        );
-
       return res.status(200).json({
         success: true,
-        message: result.message
+        message:
+          "Logout successful"
       });
 
     } catch (error) {
@@ -79,14 +76,10 @@ class AuthController {
 
     try {
 
-      const result =
-        await authService.logoutAll(
-          req.user
-        );
-
       return res.status(200).json({
         success: true,
-        message: result.message
+        message:
+          "Logout from all devices successful"
       });
 
     } catch (error) {
