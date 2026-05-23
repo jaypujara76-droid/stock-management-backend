@@ -72,7 +72,7 @@ class AuthService {
 
     if (!user) {
       throw new Error(
-        "User not found"
+        "Invalid first name or password"
       );
     }
 
@@ -101,8 +101,14 @@ class AuthService {
     };
   }
 
-  async logout(token) {
-    // Logout no longer uses a blacklist model.
+  async logout(token, user) {
+    user.activeTokens = user.activeTokens.filter(
+      (activeToken) =>
+        activeToken !== token
+    );
+
+    await user.save();
+
     return {
       message: "Logout successful"
     };

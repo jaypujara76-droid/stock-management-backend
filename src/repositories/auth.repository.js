@@ -15,7 +15,7 @@ class AuthRepository {
   async findUserByName(firstName) {
 
     return await User.findOne({
-      firstName
+      firstName: firstName.trim()
     });
   }
 

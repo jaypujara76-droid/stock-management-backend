@@ -57,6 +57,11 @@ class AuthController {
 
     try {
 
+      await authService.logout(
+        req.token,
+        req.user
+      );
+
       return res.status(200).json({
         success: true,
         message:
@@ -75,6 +80,10 @@ class AuthController {
   async logoutAll(req, res) {
 
     try {
+
+      await authService.logoutAll(
+        req.user
+      );
 
       return res.status(200).json({
         success: true,

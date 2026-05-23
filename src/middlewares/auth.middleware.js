@@ -42,6 +42,16 @@ const authMiddleware = async (
       });
     }
 
+    if (
+      !Array.isArray(user.activeTokens) ||
+      !user.activeTokens.includes(token)
+    ) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid or expired token"
+      });
+    }
+
     req.user = user;
 
     req.token = token;
