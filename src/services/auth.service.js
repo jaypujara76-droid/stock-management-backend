@@ -6,9 +6,6 @@ const authRepository =
 const generateToken =
   require("../utils/generateToken");
 
-const BlacklistedToken =
-  require("../models/BlacklistedToken");
-
 class AuthService {
 
   async register(data) {
@@ -105,11 +102,7 @@ class AuthService {
   }
 
   async logout(token) {
-
-    await BlacklistedToken.create({
-      token
-    });
-
+    // Logout no longer uses a blacklist model.
     return {
       message: "Logout successful"
     };
