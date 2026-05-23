@@ -53,6 +53,13 @@ class AuthController {
     }
   }
 
+  async validate(req, res) {
+    return res.status(200).json({
+      success: true,
+      message: "Token is valid"
+    });
+  }
+
   async logout(req, res) {
 
     try {

@@ -18,6 +18,12 @@ router.post(
   authController.login
 );
 
+router.get(
+  "/validate",
+  authMiddleware,
+  authController.validate
+);
+
 router.post(
   "/logout",
   authMiddleware,

@@ -12,13 +12,13 @@ class OrderRepository {
     return await Order.findById(id);
   }
 
-  async getAll(sortField, sortOrder) {
+  async getAll(sortField, sortOrder, userId) {
 
     const sort = {};
 
     sort[sortField] = sortOrder;
 
-    return await Order.find()
+    return await Order.find({ userId })
       .populate("stockId")
       .sort(sort);
   }

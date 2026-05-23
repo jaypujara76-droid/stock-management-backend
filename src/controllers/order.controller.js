@@ -9,7 +9,8 @@ class OrderController {
 
       const order =
         await orderService.createOrder(
-          req.body
+          req.body,
+          req.user._id
         );
 
       return res.status(201).json({
@@ -40,7 +41,8 @@ class OrderController {
       const orders =
         await orderService.getOrders(
           sortField,
-          sortOrder ? Number(sortOrder) : -1
+          sortOrder ? Number(sortOrder) : -1,
+          req.user._id
         );
 
       return res.status(200).json({
@@ -62,7 +64,8 @@ class OrderController {
     try {
 
       await orderService.deleteOrder(
-        req.params.id
+        req.params.id,
+        req.user._id
       );
 
       return res.status(200).json({

@@ -6,7 +6,7 @@ const stockRepository =
 
 class OrderService {
 
-  async createOrder(data) {
+  async createOrder(data, userId) {
 
     const {
       customerName,
@@ -53,6 +53,7 @@ class OrderService {
 
     return await orderRepository.create({
       customerName,
+      userId,
       stockId,
       orderQty
     });
@@ -60,16 +61,18 @@ class OrderService {
 
   async getOrders(
     sortField = "createdAt",
-    sortOrder = -1
+    sortOrder = -1,
+    userId
   ) {
 
     return await orderRepository.getAll(
       sortField,
-      sortOrder
+      sortOrder,
+      userId
     );
   }
 
-  async deleteOrder(id) {
+  async deleteOrder(id, userId) {
 
     const order =
       await orderRepository.findById(id);
@@ -77,6 +80,12 @@ class OrderService {
     if (!order) {
       throw new Error(
         "Order not found"
+      );
+    }
+
+    if (!order.userId.equals(userId)) {
+      throw new Error(
+        "Not authorized to delete this order"
       );
     }
 
