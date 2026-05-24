@@ -26,4 +26,10 @@ router.delete(
   stockController.deleteStock
 );
 
+router.put(
+  "/:id",
+  authMiddleware,
+  stockController.updateStock
+);
+
 module.exports = router;

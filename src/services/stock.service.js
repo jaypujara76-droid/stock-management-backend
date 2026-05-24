@@ -102,6 +102,35 @@ class StockService {
 
     return await stockRepository.delete(id);
   }
+
+  async updateStock(id, data) {
+
+    const {
+      qty
+    } = data;
+
+    if (!qty || qty <= 0) {
+
+      throw new Error(
+        "Quantity must be greater than 0"
+      );
+    }
+
+    const stock =
+      await stockRepository.findById(id);
+
+    if (!stock) {
+
+      throw new Error(
+        "Stock not found"
+      );
+    }
+
+    return await stockRepository.updateQty(
+      id,
+      qty
+    );
+  }
 }
 
 module.exports =

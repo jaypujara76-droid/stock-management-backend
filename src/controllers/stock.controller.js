@@ -79,6 +79,32 @@ class StockController {
       });
     }
   }
+
+  async updateStock(req, res) {
+
+    try {
+
+      const stock =
+        await stockService.updateStock(
+          req.params.id,
+          req.body
+        );
+
+      return res.status(200).json({
+        success: true,
+        message:
+          "Stock updated successfully",
+        data: stock
+      });
+
+    } catch (error) {
+
+      return res.status(400).json({
+        success: false,
+        message: error.message
+      });
+    }
+  }
 }
 
 module.exports =
